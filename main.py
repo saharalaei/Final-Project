@@ -1,11 +1,12 @@
 import json
-from flask import Flask, request, redirect, g, render_template, jsonify
+from flask import Flask, request, redirect, g, render_template, jsonify, session
 import requests
 from urllib.parse import quote
-from config import client_id, client_secret
+from config import client_id, client_secret, mongo_uri
 import base64
 from datetime import date
-
+import pymongo
+import dns
 
 
 # Authentication Steps, paramaters, and responses are defined at https://developer.spotify.com/web-api/authorization-guide/
@@ -14,9 +15,16 @@ from datetime import date
 
 app = Flask(__name__)
 
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+app.config['JSON_SORT_KEYS'] = False
+
+app.config['SECRET_KEY'] = "secret key"
+app.config['SESSION_TYPE'] = 'filesystem'
+
 #  Client Keys
 CLIENT_ID = client_id
 CLIENT_SECRET = client_secret
+MONGO_CONN = mongo_uri
 
 # Spotify URLS
 SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
@@ -72,7 +80,6 @@ def callback():
     token_type = response_data["token_type"]
     expires_in = response_data["expires_in"]
 
-
     user_data = {}
     # Auth Step 6: Use the access token to access Spotify API
     authorization_header = {"Authorization": "Bearer {}".format(access_token)}
@@ -93,15 +100,31 @@ def callback():
 
     tracks = []
     track_info = {}
+
+    
     for i in range(50):
         track_info['track'] = top_50_artists['items'][i]['name']
         track_info['artist'] = top_50_artists['items'][i]['album']['artists'][0]['name']
         track_info['album'] = top_50_artists['items'][i]['album']['name']
         track_info['id'] = top_50_artists['items'][i]['id']
+
+        #get track analysis
+        track_url = "{}/audio-features?ids={}".format(SPOTIFY_API_URL,track_info['id'])
+        track_analysis_data = requests.get(track_url, headers=authorization_header).json()
+        track_info['audio_features'] = track_analysis_data['audio_features']
+
         tracks.append(track_info)
         track_info = {}
 
-
+    # track_name = []
+    # track_artist = []
+    # track_album = []
+    #track_
+    # for i in range(50):
+    #     artists.append(top_50['items'][i]['name'])
+    #     genres.append(top_50['items'][i]['genres'])
+    #     popularity.append(top_50['items'][i]['popularity'])
+    #     artist_id.append(top_50['items'][i]['id'])
 
 
     artists=[]
@@ -130,16 +153,37 @@ def callback():
         for a in i:
             genres_complete.append(a)
 
+    user_data['date_updated'] = date.today().strftime("%m/%d/%Y")
     user_data['name'] = name
     user_data['id'] = id
     user_data['top_50_artists'] = top_artists
-    user_data['genres'] = genres_complete
-    user_data['date_updated'] = today = date.today()
     user_data['top_50_tracks']= tracks
+    user_data['genres'] = genres_complete
+
+    mongo_data = user_data.copy()
     
 
+    client = pymongo.MongoClient(MONGO_CONN)
+    db = client.test
+
+    client.spotify['user-data'].replace_one(
+                {"id":mongo_data['id']},mongo_data, upsert=True)
+     
+
+  
+    
+    
 
     return jsonify(user_data)
+
+    #session['user_data'] = user_data
+    #return jsonify(user_data)
+    #return redirect(f"{CLIENT_SIDE_URL}:{PORT}/user_dash")
+
+@app.route("/user_dash")
+def user_dashboard():
+    #return jsonify(session['user_data'])
+    return render_template("index.html")
 
 
 if __name__ == "__main__":

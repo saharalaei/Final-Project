@@ -5,7 +5,8 @@ from urllib.parse import quote
 import os
 import base64
 from datetime import date
-
+import pymongo
+import dns
 
 
 # Authentication Steps, paramaters, and responses are defined at https://developer.spotify.com/web-api/authorization-guide/
@@ -14,11 +15,17 @@ from datetime import date
 
 app = Flask(__name__)
 
+
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+app.config['JSON_SORT_KEYS'] = False
+
 #  Client Keys
 # CLIENT_ID = client_id
 # CLIENT_SECRET = client_secret
 CLIENT_ID = os.environ.get('CLIENT_ID')
 CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
+mongo_uri = os.environ.get('MONGO_PASSWORD')
+
 
 # Spotify URLS
 SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
@@ -92,6 +99,8 @@ def callback():
     top_50_url_tracks = "{}/me/top/tracks?time_range=long_term&limit=50".format(SPOTIFY_API_URL)
     top_50_artists = requests.get(top_50_url_tracks, headers=authorization_header).json()
 
+    
+
     tracks = []
     track_info = {}
     for i in range(50):
@@ -99,6 +108,12 @@ def callback():
         track_info['artist'] = top_50_artists['items'][i]['album']['artists'][0]['name']
         track_info['album'] = top_50_artists['items'][i]['album']['name']
         track_info['id'] = top_50_artists['items'][i]['id']
+
+        #get track analysis
+        track_url = "{}/audio-features?ids={}".format(SPOTIFY_API_URL,track_info['id'])
+        track_analysis_data = requests.get(track_url, headers=authorization_header).json()
+        track_info['audio_features'] = track_analysis_data['audio_features']
+
         tracks.append(track_info)
         track_info = {}
 
@@ -131,16 +146,33 @@ def callback():
         for a in i:
             genres_complete.append(a)
 
+    user_data['date_updated'] = date.today().strftime("%m/%d/%Y")
     user_data['name'] = name
     user_data['id'] = id
     user_data['top_50_artists'] = top_artists
-    user_data['genres'] = genres_complete
-    user_data['date_updated'] = today = date.today()
     user_data['top_50_tracks']= tracks
+    user_data['genres'] = genres_complete
+
+
+
+    
     
 
+    
+    mongo_data = user_data.copy()
+
+    MONGO_CONN = "{}".format(mongo_uri)
+
+  
+    client = pymongo.MongoClient(MONGO_CONN)
+
+    client.spotify['user-data'].replace_one(
+                {"id":mongo_data['id']},mongo_data, upsert = True)
+  
 
     return jsonify(user_data)
+
+    
 
 
 if __name__ == "__main__":
