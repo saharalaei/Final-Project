@@ -76,7 +76,7 @@ function initialPage(data){
     var avg_acousticness = Math.round((total_acousticness/acousticness.length)*100);
     var avg_energy = Math.round((total_energy/energy.length)*100); 
 
-    Highcharts.chart('pie-plot', {
+    Highcharts.chart('pie1-plot', {
         chart: {
             type: 'pie',
             options3d: {
@@ -107,7 +107,7 @@ function initialPage(data){
         },
         plotOptions: {
             pie: {
-                colors: ["#20B2AA", "gray"],
+                colors: ["#1DB954", "gray"],
                 allowPointSelect: true,
                 cursor: 'pointer',
                 depth: 35,
@@ -132,6 +132,193 @@ function initialPage(data){
                 },
                 {name:'Non-Danceable', 
                 y: 100-avg_danceability
+                }
+                              
+            ]
+        }]
+    });
+
+    Highcharts.chart('pie2-plot', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            },
+            backgroundColor: '#181818'
+        },
+        legend: {
+            color: 'white',
+             
+        },
+        title: {
+            text: "How " +user_name+ "'s play list is Happy?",
+            style: {
+                color: "white"
+            },
+           
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<b>{point.percentage:.1f} </b>%'
+        },
+        plotOptions: {
+            pie: {
+                colors: ["#1DB954", "gray"],
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}',
+                    style: {
+                        fontSize: '13px',
+                        color: "white"
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            data: [
+                {
+                    name: 'Happy',
+                    y: avg_happiness,
+                    sliced: true,
+                    selected: true
+                },
+                {name:'Non-Happy' , 
+                y: 100-avg_happiness
+                }
+                              
+            ]
+        }]
+    });
+
+    
+    Highcharts.chart('pie3-plot', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            },
+            backgroundColor: '#181818'
+        },
+        legend: {
+            color: 'white',
+             
+        },
+        title: {
+            text: "How " +user_name+ "'s play list is Energetic?",
+            style: {
+                color: "white"
+            },
+           
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<b>{point.percentage:.1f} </b>%'
+        },
+        plotOptions: {
+            pie: {
+                colors: ["#1DB954", "gray"],
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}',
+                    style: {
+                        fontSize: '13px',
+                        color: "white"
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            data: [
+                {
+                    name: 'Energetic',
+                    y: avg_energy,
+                    sliced: true,
+                    selected: true
+                },
+                {name:'Non-Energetic' , 
+                y: 100-avg_happiness
+                }
+                              
+            ]
+        }]
+    });
+
+    Highcharts.chart('pie4-plot', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            },
+            backgroundColor: '#181818'
+        },
+        legend: {
+            color: 'white',
+             
+        },
+        title: {
+            text: "How " +user_name+ "'s play list is Acoustic?",
+            style: {
+                color: "white"
+            },
+           
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<b>{point.percentage:.1f} </b>%'
+        },
+        plotOptions: {
+            pie: {
+                colors: ["#1DB954", "gray"],
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}',
+                    style: {
+                        fontSize: '13px',
+                        color: "white"
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            data: [
+                {
+                    name: 'Acoustic',
+                    y: avg_acousticness,
+                    sliced: true,
+                    selected: true
+                },
+                {name:'Non-Acoustic' , 
+                y: 100-avg_acousticness
                 }
                               
             ]

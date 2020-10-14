@@ -89,7 +89,7 @@ function initialPage(data){
         mode: 'markers+text',
         marker: {
           size: (top50_popularity.slice(0,10)).map(i=>i*1.1),
-          color: ["#48D1CC", "#48D1CC", "#48D1CC", "#48D1CC", "#48D1CC", "#48D1CC", "#48D1CC", "#48D1CC", "#48D1CC", "#48D1CC"]
+          color: ["#1DB954", " #1DB954", " #1DB954", " #1DB954", " #1DB954", " #1DB954", " #1DB954", " #1DB954", " #1DB954", " #1DB954"]
         }
       }];
 
@@ -99,8 +99,8 @@ function initialPage(data){
         font: {
         color: "white"
         }},
-        paper_bgcolor: "#181818",
-        plot_bgcolor :'#181818',
+        paper_bgcolor: "#191414",
+        plot_bgcolor :'#191414',
         xaxis: {showticklabels: false, tickfont: {
             color: "white",
         }}, 
@@ -118,6 +118,90 @@ function initialPage(data){
       }
 
       Plotly.newPlot("bubble-plot", dataset_bubble, layout_bubble);
+      // Highcharts.chart('bubble-plot', {
+      //   chart: {
+      //       type: 'packedbubble',
+      //          height: '100%'
+      //   },
+      //   title: {
+      //       text: 'Carbon emissions around the world (2014)'
+      //   },
+      //   tooltip: {
+      //       useHTML: true,
+      //       pointFormat: '<b>{point.name}:</b> {point.value}m CO<sub>2</sub>'
+      //   },
+      //   plotOptions: {
+      //       packedbubble: {
+      //           minSize: '30%',
+      //           maxSize: '120%',
+      //           zMin: 0,
+      //           zMax: 1000,
+      //           layoutAlgorithm: {
+      //               splitSeries: false,
+      //               gravitationalConstant: 0.02
+      //           },
+      //           dataLabels: {
+      //               enabled: true,
+      //               format: '{point.name}',
+      //               filter: {
+      //                   property: 'y',
+      //                   operator: '>',
+      //                   value: 250
+      //               },
+      //               style: {
+      //                   color: 'black',
+      //                   textOutline: 'none',
+      //                   fontWeight: 'normal'
+      //               }
+      //           }
+      //       }
+      //   },
+      //   series: [{
+      //       name: 'Top-10-Artists',
+      //       data: [{
+      //           name: top50_artist [0],
+      //           value: top50_popularity[0]
+      //       }, {
+      //           name: top50_artist [1],
+      //           value: top50_popularity[1]
+      //       },
+      //       {
+      //           name: top50_artist [2],
+      //           value: top50_popularity[2]
+      //       },
+      //       {
+      //           name: top50_artist [3],
+      //           value: top50_popularity[3]
+      //       },
+      //       {
+      //           name: top50_artist [4],
+      //           value: top50_popularity[4]
+      //       },
+      //       {
+      //           name: top50_artist [5],
+      //           value: top50_popularity[5]/10
+      //       },
+      //       {
+      //           name: top50_artist [6],
+      //           value: top50_popularity[6]/10
+      //       },
+      //       {
+      //           name: top50_artist [7],
+      //           value: top50_popularity[7]/10
+      //       },
+      //       {
+      //           name: top50_artist [8],
+      //           value: top50_popularity[8]/10
+      //       },
+      //       {
+      //           name: top50_artist [9],
+      //           value: top50_popularity[9]/10
+      //       },
+      //       ]
+      //    } ]
+        
+      // });
+                  
 
 };   
 
@@ -126,3 +210,5 @@ function initialPage(data){
     var data = await d3.json("henry_data.json");
     initialPage(data);
 })();
+
+
