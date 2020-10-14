@@ -1,5 +1,5 @@
 import json
-from flask import Flask, request, redirect, g, render_template, jsonify, session
+from flask import Flask, request, redirect, g, render_template, jsonify, session, url_for
 import requests
 from urllib.parse import quote
 from config import client_id, client_secret, mongo_uri
@@ -17,8 +17,7 @@ app = Flask(__name__)
 
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 app.config['JSON_SORT_KEYS'] = False
-
-app.config['SECRET_KEY'] = "secret key"
+app.config['SECRET_KEY'] = "s"
 app.config['SESSION_TYPE'] = 'filesystem'
 
 #  Client Keys
@@ -39,6 +38,8 @@ PORT = 8080
 REDIRECT_URI = "{}:{}/callback".format(CLIENT_SIDE_URL, PORT)
 SCOPE = 'user-read-email user-top-read'
 
+
+
 auth_query_parameters = {
     "response_type": "code",
     "redirect_uri": REDIRECT_URI,
@@ -54,13 +55,14 @@ def index():
     url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
     auth_url = "{}/?{}".format(SPOTIFY_AUTH_URL, url_args)
     return redirect(auth_url)
+    #return redirect('/user_data')
 
 
 @app.route("/callback")
 def callback():
     # Auth Step 4: Requests refresh and access tokens
-    auth_token = request.args['code']
-    code_payload = {
+    auth_token =  session['auth_token'] = request.args['code']
+    code_payload = session['code_payload'] = {
         "grant_type": "authorization_code",
         "code": str(auth_token),
         "redirect_uri": REDIRECT_URI,
@@ -70,25 +72,54 @@ def callback():
 
     auth = "{}:{}".format(CLIENT_ID, CLIENT_SECRET)
     base64encoded = base64.urlsafe_b64encode(auth.encode('UTF-8')).decode('ascii')
-    headers = {"Authorization": "Basic {}".format(base64encoded)}
+    headers = session['headers'] = {"Authorization": "Basic {}".format(base64encoded)}
     post_request = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers = headers)
 
     # Auth Step 5: Tokens are Returned to Application
     response_data = json.loads(post_request.text)
-    access_token = response_data["access_token"]
+
+    access_token = session["access_token"] =  response_data["access_token"]
     refresh_token = response_data["refresh_token"]
     token_type = response_data["token_type"]
     expires_in = response_data["expires_in"]
 
+    return redirect('/get_user_data')
+
+    
+     
+
+   
+    #redirect(url_for('http://127.0.0.1:8080', json=json.dumps(my_form_dict)), code=307)
+    
+    #return redirect(f"{CLIENT_SIDE_URL}:{PORT}/user_data", user_data = user_data)
+    #session['user_data'] = user_data
+    #return jsonify(user_data)
+
+def redirect_page():
+    return redirect(url_for('user_json_data'))
+    #return(request.url)
+    
+    #return render_template("index.html", user_data = user_data)
+
+@app.route("/user_dash")
+def user_dashboard():
+    #return jsonify(session['user_data'])
+    return render_template("compare.html")
+
+@app.route("/get_user_data")
+def user_json_data():
+
+
     user_data = {}
     # Auth Step 6: Use the access token to access Spotify API
-    authorization_header = {"Authorization": "Bearer {}".format(access_token)}
+    authorization_header = {"Authorization": "Bearer {}".format(session['access_token'])}
 
     # Get profile data
     user_url = "{}/me".format(SPOTIFY_API_URL)
     user = requests.get(user_url, headers=authorization_header).json()
     name = user['display_name']
     id = user['id']
+    user_image_url = user['images'][0]['url']
     limit=50
 
 
@@ -107,6 +138,7 @@ def callback():
         track_info['artist'] = top_50_artists['items'][i]['album']['artists'][0]['name']
         track_info['album'] = top_50_artists['items'][i]['album']['name']
         track_info['id'] = top_50_artists['items'][i]['id']
+        track_info['track_url'] = top_50_artists['items'][i]['external_urls']['spotify']
 
         #get track analysis
         track_url = "{}/audio-features?ids={}".format(SPOTIFY_API_URL,track_info['id'])
@@ -116,15 +148,6 @@ def callback():
         tracks.append(track_info)
         track_info = {}
 
-    # track_name = []
-    # track_artist = []
-    # track_album = []
-    #track_
-    # for i in range(50):
-    #     artists.append(top_50['items'][i]['name'])
-    #     genres.append(top_50['items'][i]['genres'])
-    #     popularity.append(top_50['items'][i]['popularity'])
-    #     artist_id.append(top_50['items'][i]['id'])
 
 
     artists=[]
@@ -156,9 +179,12 @@ def callback():
     user_data['date_updated'] = date.today().strftime("%m/%d/%Y")
     user_data['name'] = name
     user_data['id'] = id
+    user_data['user_image_url'] = user_image_url
     user_data['top_50_artists'] = top_artists
     user_data['top_50_tracks']= tracks
     user_data['genres'] = genres_complete
+
+    session['data'] = user_data
 
     mongo_data = user_data.copy()
     
@@ -168,22 +194,15 @@ def callback():
 
     client.spotify['user-data'].replace_one(
                 {"id":mongo_data['id']},mongo_data, upsert=True)
-     
-
-  
     
-    
+    client.close()
 
-    return jsonify(user_data)
 
-    #session['user_data'] = user_data
     #return jsonify(user_data)
-    #return redirect(f"{CLIENT_SIDE_URL}:{PORT}/user_dash")
-
-@app.route("/user_dash")
-def user_dashboard():
-    #return jsonify(session['user_data'])
-    return render_template("index.html")
+    return render_template("index.html", user_data = user_data)
+    #return render_template("index.html")
+    
+    
 
 
 if __name__ == "__main__":
