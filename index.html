@@ -45,69 +45,55 @@
               <a
                 href="#"
                 class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border"
-                >Data Scientist's - Spotify</a
-              >
+                >Data Scientist's - Spotify</a>
               <div class="bottom-border pb-3">
+                <!--Picture where we want to import spotify account logo-->
                 <img
-                  src="images/admin.jpeg"
+                  src="Spotify_logo.png"
                   width="50"
                   class="rounded-circle mr-3"
                 />
+                <!--Where we want to import name of user-->
                 <a href="#" class="text-white" id="userName">Derrik Dennis</a>
               </div>
               <ul class="navbar-nav flex-column mt-4">
                 <li class="nav-item">
-                  <a href="#" class="nav-link text-white p-3 mb-2 current"
+                  <a href="index.html" class="nav-link text-white p-3 mb-2 current"
                     ><i class="fas fa-home text-light fa-lg mr-3"></i
-                    >Dashboard</a
+                    >My Dashboard</a
                   >
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"
-                    ><i class="fas fa-user text-light fa-lg mr-3"></i>Profile</a
+                    ><i class="fas fa-database text-light fa-lg mr-3"></i>
+                    JSON Data</a
                   >
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"
-                    ><i class="fas fa-envelope text-light fa-lg mr-3"></i
-                    >Inbox</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"
-                    ><i class="fas fa-shopping-cart text-light fa-lg mr-3"></i
-                    >Sales</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"
-                    ><i class="fas fa-chart-line text-light fa-lg mr-3"></i
-                    >Analytics</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"
+                  <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link" 
                     ><i class="fas fa-chart-bar text-light fa-lg mr-3"></i
-                    >Charts</a
+                    >Listening Comparison</a
+                  >
+                </li>
+                <!-- <li class="nav-item">
+                  <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"
+                  ><i class="fas fa-chart-bar text-light fa-lg mr-3"></i
+                    >D3 Visualization</a
+                  > -->
+                </li>
+                <li class="nav-item">
+                  <a href="tableau.html" class="nav-link text-white p-3 mb-2 sidebar-link"
+                    ><i class="fas fa-chart-line text-light fa-lg mr-3"></i
+                    >Tableau Visualization</a
                   >
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"
-                    ><i class="fas fa-table text-light fa-lg mr-3"></i>Tables</a
+                  <a href="developers.html" class="nav-link text-white p-3 mb-2 sidebar-link"
+                    ><i class="far fa-user text-light fa-lg mr-3"></i
+                    >Developers</a
                   >
                 </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"
-                    ><i class="fas fa-wrench text-light fa-lg mr-3"></i
-                    >Settings</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"
-                    ><i class="fas fa-file-alt text-light fa-lg mr-3"></i
-                    >Documentation</a
-                  >
-                </li>
+                
               </ul>
             </div>
             <!--end of sidebar-->
@@ -117,7 +103,7 @@
             >
               <div class="row align-items-center">
                 <div class="col-md-4">
-                  <h4 class="text-light text-uppercase mb-0">Dashboard</h4>
+                  <h4 class="text-light text-uppercase mb-0">Spotify Analytics</h4>
                 </div>
                 <div class="col-md-5">
                   <form>
@@ -127,8 +113,8 @@
                         class="form-control search-input"
                         placeholder="Search..."
                       />
-                      <button type="button" class="btn btn-light search-button">
-                        <i class="fas fa-search text-danger"></i>
+                      <button type="button" class="btn btn-dark search-button">
+                        <i class="fas fa-search text-success"></i>
                       </button>
                     </div>
                   </form>
@@ -152,7 +138,7 @@
                         data-toggle="modal"
                         data-target="#sign-out"
                       >
-                        <i class="fas fa-sign-out-alt text-danger fa-lg"></i>
+                        <i class="fas fa-sign-out-alt text-success fa-lg"></i>
                       </a>
                     </li>
                   </ul>
@@ -200,27 +186,11 @@
                 <div class="card card-common">
                   <div class="card-body">
                     <div class="d-flex justify-content-between">
-                      <i class="fas fa-shopping-cart fa-3x text-warning"></i>
+                      <i class="fas fa-headphones mdb-gallery-view-icon fa-3x text-success"></i>
                       <div class="text-right text-secondary">
-                        <h5>Sales</h5>
-                        <h3>$135,000</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer text-secondary">
-                    <i class="fas fa-sync mr-3"> </i>
-                    <span>Updated Now</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-sm-6 p-2">
-                <div class="card card-common">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <i class="fas fa-money-bill-alt fa-3x text-success"></i>
-                      <div class="text-right text-secondary">
-                        <h5>Expenses</h5>
-                        <h3>$39,000</h3>
+                        <h5>Top Genre</h5>
+                        <!--Insert top Genre from Data-->
+                        <h3>Placeholder</h3>
                       </div>
                     </div>
                   </div>
@@ -236,8 +206,9 @@
                     <div class="d-flex justify-content-between">
                       <i class="fas fa-users fa-3x text-info"></i>
                       <div class="text-right text-secondary">
-                        <h5>Users</h5>
-                        <h3>15,000</h3>
+                        <h5>Top Artist</h5>
+                        <!--Insert top Artist from Data-->
+                        <h3>Placeholder</h3>
                       </div>
                     </div>
                   </div>
@@ -248,6 +219,24 @@
                 </div>
               </div>
               <div class="col-xl-3 col-sm-6 p-2">
+                <div class="card card-common">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <i class="fas fa-fire fa-3x text-danger"></i>
+                      <div class="text-right text-secondary">
+                        <h5>Top Song</h5>
+                        <!--Top song from Data-->
+                        <h3>Placeholder</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-secondary">
+                    <i class="fas fa-sync mr-3"> </i>
+                    <span>Updated Now</span>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-xl-3 col-sm-6 p-2">
                 <div class="card card-common">
                   <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -262,7 +251,7 @@
                     <i class="fas fa-sync mr-3"> </i>
                     <span>Updated Now</span>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -278,8 +267,8 @@
           <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
             <div class="row align-items-center">
               <div class="col-xl-6 col-12 mb-4 mb-xl-0">
-                <h3 class="text-muted text-center mb-3">Staff Salary</h3>
-                <table class="table table-striped bg-light text-center">
+                <h3 class="text-muted text-center mb-3">Top 50 Songs</h3>
+                <!-- <table class="table table-striped bg-light text-center">
                   <thead>
                     <tr class="text-muted">
                       <th>#</th>
@@ -346,7 +335,7 @@
                       </td>
                     </tr>
                   </tbody>
-                </table>
+                </table> -->
                 <!--pagination -->
                 <nav>
                   <ul class="pagination justify-content-center">
@@ -374,8 +363,8 @@
               </div>
               <!-- end of pagination-->
               <div class="col-xl-6 col-12 mb-4 mb-xl-0">
-                <h3 class="text-muted text-center mb-3">Recent Payments</h3>
-                <table class="table table-dark table-hover text-center">
+                <h3 class="text-muted text-center mb-3">D3 Vis</h3>
+                <!-- <table class="table table-dark table-hover text-center">
                   <thead>
                     <tr class="text-muted">
                       <th>#</th>
@@ -453,7 +442,7 @@
                       </td>
                     </tr>
                   </tbody>
-                </table>
+                </table> -->
                 <!--pagination -->
                 <nav>
                   <ul class="pagination justify-content-center">
@@ -496,8 +485,8 @@
             <div class="row mb-4 align-items-center">
               <div class="col-xl-6 col-12 mb-4 mb-xl-0">
                 <div class="bg-dark text-white p-4 rounded">
-                  <h4 class="mb-5">Conversion Rates</h4>
-                  <h6 class="mb-3">Google Chrome</h6>
+                  <h4 class="mb-5">D3 Vis</h4>
+                  <!-- <h6 class="mb-3">Google Chrome</h6>
                   <div class="progress mb-4" style="height: 20px">
                     <div class="progress-bar progress-bar-striped font-weight-bold" style="width:91%">
                       91%
@@ -520,12 +509,12 @@
                     <div class="progress-bar progress-bar-striped font-weight-bold bg-info" style="width:10%">
                       10%
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <div class="col-xl-6 col-12">
-                <h4 class="text-muted p-3 mb-3">Tasks:</h4>
-                <div class="container-fluid bg-white">
+                <h4 class="text-muted p-3 mb-3">D3 Vis</h4>
+                <!-- <div class="container-fluid bg-white">
                   <div class="row py-3 mb-4 task-border align-items-center">
                     <div class="col-1">
                       <input type="checkbox" checked>
@@ -572,8 +561,32 @@
                       </a>
                     </div>
                   </div>
-                </div>
-                <div class="container-fluid bg-white">
+                </div> -->
+                <!-- <div class="container-fluid bg-white">
+                  <div class="row py-3 mb-4 task-border align-items-center">
+                    <div class="col-1">
+                      <input type="checkbox" checked>
+                    </div>
+                    <div class="col-sm-9 col-8">
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    </div>
+                    <div class="col-1">
+                      <a href="#" data-toggle="tooltip" 
+                      title="<h6>edit</h6>" data-html="true" 
+                      data-placement="top">
+                        <i class="fas fa-edit fa-lg text-success mr-2"></i>
+                      </a>
+                    </div>
+                    <div class="col-1">
+                      <a href="#" data-toggle="tooltip" 
+                      title="<h6>delete</h6>" data-html="true" 
+                      data-placement="top">
+                        <i class="fas fa-trash-alt fa-lg text-danger"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div> -->
+                <!-- <div class="container-fluid bg-white">
                   <div class="row py-3 mb-4 task-border align-items-center">
                     <div class="col-1">
                       <input type="checkbox" checked>
@@ -620,31 +633,7 @@
                       </a>
                     </div>
                   </div>
-                </div>
-                <div class="container-fluid bg-white">
-                  <div class="row py-3 mb-4 task-border align-items-center">
-                    <div class="col-1">
-                      <input type="checkbox" checked>
-                    </div>
-                    <div class="col-sm-9 col-8">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    </div>
-                    <div class="col-1">
-                      <a href="#" data-toggle="tooltip" 
-                      title="<h6>edit</h6>" data-html="true" 
-                      data-placement="top">
-                        <i class="fas fa-edit fa-lg text-success mr-2"></i>
-                      </a>
-                    </div>
-                    <div class="col-1">
-                      <a href="#" data-toggle="tooltip" 
-                      title="<h6>delete</h6>" data-html="true" 
-                      data-placement="top">
-                        <i class="fas fa-trash-alt fa-lg text-danger"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -654,7 +643,7 @@
     <!-- End of Progress / task list -->
 
     <!-- activities / quick post-->
-    <section>
+    <!-- <section>
       <div class="container-flu">
         <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
           <div class="row">
@@ -667,7 +656,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <!-- end activities / quick post-->
 
     <script
