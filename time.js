@@ -77,6 +77,8 @@ function initialPage(data){
     var avg_energy = Math.round((total_energy/energy.length)*100); 
 
   var t = avg_duration/60000;
+
+  
     //Guage Chart:
   // Trig to calc meter point
   var degrees = 180 - ((180/9)*t);
@@ -143,7 +145,7 @@ function initialPage(data){
   };
 
    // Plot the chart to a div tag with id "plot"
-   Plotly.newPlot('bar-plot', data_guag, layout_guag); 
+   Plotly.newPlot('clock', data_guag, layout_guag); 
     
 
 };   
