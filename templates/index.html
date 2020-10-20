@@ -1,8 +1,507 @@
 <!DOCTYPE html>
-<doctype html>
-<html>
-	
-	<p> Sup </p>
-	
-</html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'"> -->
+  <title>My Spotify Music</title>
+  <link rel="shortcut icon" href="#">	
+  
+  <!-- <script src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script> -->
+    <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
+	<!-- <script  src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script> -->
+	  <!-- <script  src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script> -->
+    <!-- <script  src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="   crossorigin="anonymous"></script> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"/>
+<link rel="stylesheet" href="./static/style.css">
 
+</head>
+
+
+
+
+
+<body>
+
+	
+
+		
+
+    <!--Navbar  -->
+    <nav class="navbar navbar-expand-md navbar-light">
+      <button
+        class="navbar-toggler ml-auto mb-2 bg-light"
+        type="button"
+        data-toggle="collapse"
+        data-target="#myNavbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <div class="container-fluid">
+          <div class="row">
+            <!--sidebar-->
+            <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
+              <a
+                href="#"
+                class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border"
+                >Data Scientists</a>
+              <div class="bottom-border pb-3">
+                <!--Picture where we want to import spotify account logo-->
+                <img
+                  width="50"
+                  class="rounded-circle mr-3"
+				  id = "userPic"
+                />
+                <!--Where we want to import name of user-->
+                <a href="#" class="text-white" id="userName"></a>
+              </div>
+              <ul class="navbar-nav flex-column mt-4">
+                <li class="nav-item">
+                  <a href="/get_user_data" class="nav-link text-white p-3 mb-2 current"
+                    ><i class="fas fa-home text-light fa-lg mr-3"></i
+                    >My Dashboard</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a href="/json" class="nav-link text-white p-3 mb-2 sidebar-link"
+                    ><i class="fas fa-database text-light fa-lg mr-3"></i>
+                    JSON Data</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a href="/compare" class="nav-link text-white p-3 mb-2 sidebar-link" 
+                    ><i class="fas fa-chart-bar text-light fa-lg mr-3"></i
+                    >Listening Comparison</a
+                  >
+                </li>
+                <!-- <li class="nav-item">
+                  <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"
+                  ><i class="fas fa-chart-bar text-light fa-lg mr-3"></i
+                    >D3 Visualization</a
+                  > -->
+                </li>
+                <li class="nav-item">
+                  <a href="/global_user_data" class="nav-link text-white p-3 mb-2 sidebar-link"
+                    ><i class="fas fa-chart-line text-light fa-lg mr-3"></i
+                    >Tableau Visualization</a
+                  >
+                </li>
+				
+					 <li class="nav-item">
+                  <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"
+                    ><i class="fas fa-music text-light fa-lg mr-3"></i
+                    >ML Song Recommender<br> (in development)</a
+                  >
+                </li>
+				
+				
+				
+				
+				
+                <li class="nav-item">
+                  <a href="/developers" class="nav-link text-white p-3 mb-2 sidebar-link"
+                    ><i class="far fa-user text-light fa-lg mr-3"></i
+                    >Developers</a
+                  >
+                </li>
+                
+              </ul>
+            </div>
+            <!--end of sidebar-->
+            <!--top-nav-->
+            <div
+              class="col-xl-10 col-lg-9 col-md-8 ml-auto bg-dark fixed-top top-navbar"
+            >
+              <div class="row align-items-center">
+                <div class="col-md-11">
+                  <h4 style = 'text-align:center; vertical-align: middle' class="text-light text-uppercase mb-0">Spotilytics (Spotify Analytics)</h4>
+                </div>
+     
+	 
+	 
+	 
+                <!-- <div class="col-md-1"> -->
+                  <!-- <ul class="navbar-nav"> -->
+                  
+                   
+                    <!-- <li class="nav-item ml-md-auto"> -->
+                      <!-- <a -->
+                        <!-- href="#" -->
+                        <!-- class="nav-link" -->
+                        <!-- data-toggle="modal" -->
+                        <!-- data-target="#sign-out" -->
+                      <!-- > -->
+                        <!-- <i class="fas fa-sign-out-alt text-success fa-lg"></i> -->
+                      <!-- </a> -->
+                    <!-- </li> -->
+                  <!-- </ul> -->
+                <!-- </div> -->
+              </div>
+            </div>
+            <!--end of top-nav-->
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!--End of navbar -->
+
+    <!--modal-->
+    <!-- <div class="modal fade" id="sign-out"> -->
+      <!-- <div class="modal-dialog"> -->
+        <!-- <div class="modal-content"> -->
+          <!-- <div class="modal-header"> -->
+            <!-- <h4 class="modal-title">Want to leave?</h4> -->
+            <!-- <button type="button" class="close" data-dismiss="modal"> -->
+              <!-- &times; -->
+            <!-- </button> -->
+          <!-- </div> -->
+          <!-- <div class="modal-body">Press logout to leave</div> -->
+          <!-- <div class="modal-footer"> -->
+            <!-- <button type="button" class="btn btn-success" data-dismiss="modal"> -->
+              <!-- Stay here -->
+            <!-- </button> -->
+            <!-- <button type="button" class="btn btn-danger" data-dismiss="modal"> -->
+              <!-- Logout -->
+            <!-- </button> -->
+          <!-- </div> -->
+        <!-- </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
+    <!--end of modal-->
+
+    <!-- cards -->
+    <section>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+            <div class="row pt-md-5 mt-md-3 mb-5">
+              <div class="col-xl-4 col-sm-6 p-2">
+                <div class="card card-common">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <i class="fas fa-headphones fa-3x" style = "color:#1E90FF" ></i>
+                      <div class="text-right text-secondary">
+                        <h5>Top Genre</h5>
+                        <!--Insert top Genre from Data-->
+                        <h3 class="text-capitalize" id = "top_genre"></h3>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="card-footer text-secondary"> -->
+                    <!-- <i class="fas fa-sync mr-3"> </i> -->
+                    <!-- <span>Updated Now</span> -->
+                  <!-- </div> -->
+                </div>
+              </div>
+              <div class="col-xl-4 col-sm-6 p-2">
+                <div class="card card-common">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <i class="fas fa-users fa-3x" style = "color:#1E90FF"></i>
+                      <div class="text-right text-secondary">
+                        <h5>Top Artist</h5>
+                        <!--Insert top Artist from Data-->
+                        <h3 id = "top_artist"></h3>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="card-footer text-secondary"> -->
+                    <!-- <i class="fas fa-sync mr-3"> </i> -->
+                    <!-- <span>Updated Now</span> -->
+                  <!-- </div> -->
+                </div>
+              </div>
+              <div class="col-xl-4 col-sm-6 p-2">
+                <div class="card card-common">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <i class="fas fa-music fa-3x" style = "color:#1E90FF"></i>
+                      <div class="text-right text-secondary">
+                        <h5>Top Song</h5>
+                        <!--Top song from Data-->
+                        <h3 id = "top_song"></h3>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="card-footer text-secondary"> -->
+                    <!-- <i class="fas fa-sync mr-3"> </i> -->
+                    <!-- <span>Updated Now</span> -->
+                  <!-- </div> -->
+                </div>
+              </div>
+              <!-- <div class="col-xl-3 col-sm-6 p-2">
+                <div class="card card-common">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <i class="fas fa-chart-line fa-3x text-danger"></i>
+                      <div class="text-right text-secondary">
+                        <h5>Visitors</h5>
+                        <h3>45,000</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-secondary">
+                    <i class="fas fa-sync mr-3"> </i>
+                    <span>Updated Now</span>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- end of cards -->
+    <!-- tables -->
+    <section>
+      <div class="container-fluid" class = "top_artists_table" >
+        <div class="row mb-5">
+          <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+            <div class="row align-items-center">
+              <div class="col-xl-4 col-12 mb-4 mb-xl-0">
+               
+                <!-- <!-- <table class="table table-striped bg-light text-center"> -->
+ 
+	
+	
+	  <div style="height:590px;overflow:auto;box-shadow: 1px 2px 5px #999;">
+	<table class="table table-sm  table-dark">
+    <thead>
+      <tr>
+      <th style = 'text-align:center; vertical-align: middle' colspan = '2'> Your Top 50 Artists </th>
+      </tr>
+    </thead>
+    <tbody id = 'artist_table'></tbody>
+  </table>
+		</div>
+		
+	
+		</div>
+			
+
+              <!-- end of pagination-->
+              <div class="col-xl-8 col-12 mb-4 mb-xl-0">
+            
+                <!-- <!-- <table class="table table-dark table-hover text-center"> -->
+		   
+			   	  <div style="height:590px;overflow:auto;box-shadow: 1px 2px 5px #999;">
+	<table class="table table-sm  table-dark">
+    <thead>
+      <tr>
+      <th style = 'text-align:center; vertical-align: middle' colspan = '4'> Your Top 50 Songs </th>
+      </tr>
+	  <tr>
+      <th style = 'text-align:center; vertical-align: middle'>Song</th>
+	  <th style = 'text-align:center; vertical-align: middle'>Artist</th>
+	  <th style = 'text-align:center; vertical-align: middle'>Album</th>
+	  <th style = 'text-align:center; vertical-align: middle'>Spotify Player</th>
+      </tr>
+    </thead>
+    <tbody id = 'track_table'></tbody>
+  </table>
+		</div>
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+              <!-- end of pagination-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end of tables-->
+
+
+
+ 
+
+
+
+
+    <!-- Progress/task list-->
+
+
+<section>
+      <div class="container-fluid">
+        <div class="row mb-4 align-items-center">
+          <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+            <div class="row mb-4 align-items-center">
+			
+			
+              <div class="col-xl-6 col-12 mb-4 mb-xl-0">
+                <div class="p-4 rounded"  id="radial-bar-plot" style = "background-color: #212529; box-shadow: 1px 2px 5px #999;height: 500px">
+                  <h4 class="mb-5">D3 Vis</h4>
+
+                </div>
+				
+              </div>
+			  
+			  
+			      <div class="col-xl-6 col-12">
+			 
+                <div class="p-4 rounded align-items-center"  style = "background-color: #212529;box-shadow: 1px 2px 5px #999; height: 500px">
+	 
+            <div id = "genre-pie"> </div>
+		
+                </div>
+              </div>
+		
+				
+				
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End of Progress / task list -->
+		
+
+
+ 
+ 
+    <section>
+      <div class="container-fluid">
+        <div class="row mb-4 align-items-center">
+          <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+            <div class="row mb-4 align-items-center">
+			
+			
+              <div class="col-xl-12 col-12 mb-4 mb-xl-0">
+                <div class="p-4 rounded" style = "background-color: #212529; box-shadow: 1px 2px 5px #999; height: 1000px">
+                  
+				  
+				   <div id="stack-bar"  style = "height:850px"> </div>	
+
+                </div>
+				
+              </div>
+			  
+			  
+			  
+        
+            
+			
+			
+			
+			
+                
+				
+				
+				
+				
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End of Progress / task list -->
+		
+
+
+ 
+ <section>      
+			
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <!-- asd -->
+  
+  
+   <script src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script  src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+	  <script  src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <script  src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="   crossorigin="anonymous"></script>
+  
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+ 
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+ <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script> 
+
+
+ 
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.1/d3.min.js"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+   
+   <script type="text/javascript">var userData = {{ user_data | tojson }};</script>
+   
+   <!-- <script type="text/javascript" src="./static/artist_table.js"></script>  -->
+  
+  <script type="text/javascript" src="./static/genre_pie.js"></script>
+   <script type="text/javascript" src="./static/song_table.js"></script> 
+    <script type="text/javascript" src="./static/artist_table.js"></script> 
+   <script type="text/javascript" src="./static/bar.js"></script> 
+  
+  
+   <script type="text/javascript" src="./static/stack_bar.js"></script>
+ 
+</body>
+</html>
