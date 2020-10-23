@@ -1,7 +1,9 @@
-var all_users = {"average_unique_genres": 80, 
+var all_users = {"average_unique_genres": 82, 
 "average_alluser_artist_popularity": 73, 
 "most_common_artists": ["Kanye West", "Drake", "Kendrick Lamar", "The Weeknd", "Travis Scott", "J. Cole", "Post Malone", "Khalid", "Migos", "Future"], 
-"most_common_artists_counts": [17, 15, 12, 11, 11, 10, 10, 9, 9, 9]}
+"most_common_artists_counts": [17, 15, 13, 12, 11, 10, 10, 9, 9, 9]}
+
+
 console.log(userStats)
 
  // var artists = data['most_common_artists'].reverse()
