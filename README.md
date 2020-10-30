@@ -1,4 +1,17 @@
-# Spotilytics
+# [Spotilytics](https://spotify-user-music-taste.herokuapp.com) <!-- omit in toc -->
+
+## Table of Contents <!-- omit in toc -->
+- [Background](#background)
+- [Spotify API](#spotify-api)
+- [Mongo DB](#mongo-db)
+- [Heroku](#heroku)
+- [Dashboard and Python Flask App](#dashboard-and-python-flask-app)
+- [Main Page of Dashboard](#main-page-of-dashboard)
+- [JSON Data](#json-data)
+- [Listening Comparison](#listening-comparison)
+- [Tableau Visualization](#tableau-visualization)
+- [Machine Learning](#machine-learning)
+- [Developers Page](#developers-page)
 
 ## Background
 
@@ -19,6 +32,11 @@ A user of Spotify is able to log into our app using their preferred method of lo
 ## Mongo DB
 
 All information was then stored in a NoSQL Mongo DB database for futher dissemination.  Links to our Mongo DB were given to populate the charts and graphs on the front page.  Additionally, information about the user was added to previous information already collected, so that each new user helped with the listening comparison page.
+
+## Heroku
+
+Heroku was used as our platform for hosting our app
+
 
 ## Dashboard and Python Flask App
 
