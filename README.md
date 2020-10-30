@@ -34,6 +34,14 @@ In order to populate the dashboard properly, we used Python Flask to populate th
 
 ## Main Page of Dashboard
 
-The main page of the dashboard as seen here, consists of a number of components:
+The main page of the dashboard as partially seen here, consists of a number of components:
 
 ![Spotify1](img/Spotify1.png)
+
+ - Top Genre of user
+ - Top 50 Artists of the user
+ - Top 50 Songs of the user along with an embedded player for each of the 50 songs generated through the Spotify URL of each song
+ - Three graphs produced using d3.js
+   - A polar clock graph of the audio analysis of the users top 50 songs.  The audio analysis factors in danceability, energy, valence (or happiness) and acousticness
+   - A pie chart of the top 10 genres given rom the top 50 artists
+   - A stacked bar chart of the audio analysis of each of the top 50 songs 
