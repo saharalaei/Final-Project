@@ -34,3 +34,6 @@ In order to populate the dashboard properly, we used Python Flask to populate th
 
 ## Main Page of Dashboard
 
+The main page of the dashboard as seen here, consists of a number of components:
+
+![Spotify1](img/Spotify1.png)
